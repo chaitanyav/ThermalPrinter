@@ -134,3 +134,26 @@
     printer.defaultLineSpacing();
   ```
   ![Line spacing](http://i.imgur.com/LBcUTEn.jpg)
+ * Blank characters to the left of first character on the line
+ ```
+    printer.leftBlankChars(1);
+    printer.writeCharacter('A');
+    printer.lineFeed();
+
+    printer.leftBlankChars(2);
+    printer.writeCharacter('B');
+    printer.lineFeed();
+
+    printer.leftBlankChars(3);
+    printer.writeCharacter('C');
+    printer.lineFeed();
+
+    printer.leftBlankChars(4);
+    printer.writeCharacter('D');
+    printer.lineFeed();
+
+    printer.leftBlankChars(5);
+    printer.writeCharacter('E');
+    printer.lineFeed();
+ ```
+  ![left blank chars](http://i.imgur.com/TQiqDJs.jpg)
