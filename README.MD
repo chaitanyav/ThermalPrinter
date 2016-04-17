@@ -14,3 +14,43 @@
 ------------
 [Mini Thermal Product datasheet](https://cdn-shop.adafruit.com/datasheets/A2-user+manual.pdf)
 
+####Examples####
+--------------
+* Basic setup
+   ```
+     ThermalPrinter printer(5, 6);
+     printer.online();
+     printer.reset();
+     // do something with printer
+
+     printer.offline();
+   ```
+
+* Printing the PC437, PC850 Characters
+   ```
+     ThermalPrinter printer(5, 6);
+     printer.online();
+     printer.reset();
+     printer.finePrintSettings();
+
+     // select PC437 character code
+     printer.characterCodeTable(0);
+     printer.writeString("PC437 Code Table:");
+     printer.lineFeed();
+
+     for(int i = 0; i <= 0xFF; i++) {
+       printer.writeCharacter(i);
+     }
+     printer.lineFeeds(4);
+
+     // select  PC850 character code
+     printer.characterCodeTable(1);
+     printer.writeString("PC850 Code Table:");
+     printer.lineFeed();
+
+     for(int i = 0; i <= 0xFF; i++) {
+       printer.writeCharacter(i);
+     }
+     printer.lineFeeds(4);
+   ```
+   ![Character Codes](http://i.imgur.com/mhJOxTc.jpg)
