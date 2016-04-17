@@ -119,3 +119,18 @@
     printer.lineFeed();
   ```
   ![Character control commands](http://i.imgur.com/JUfi8VS.jpg)
+* Line spacing (by default a line is 32 dots wide)
+  ```
+    printer.writeString("This is line1");
+    printer.lineFeed();
+    printer.writeString("This is line2");
+    printer.lineFeed();
+
+    printer.lineSpacing(64);
+    printer.writeString("This is line1");
+    printer.lineFeed();
+    printer.writeString("This is line2");
+    printer.lineFeed();
+    printer.defaultLineSpacing();
+  ```
+  ![Line spacing](http://i.imgur.com/LBcUTEn.jpg)
