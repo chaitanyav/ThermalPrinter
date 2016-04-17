@@ -28,9 +28,7 @@
 
 * Printing the PC437, PC850 Characters
    ```
-     ThermalPrinter printer(5, 6);
-     printer.online();
-     printer.reset();
+     ....
      printer.finePrintSettings();
 
      // select PC437 character code
