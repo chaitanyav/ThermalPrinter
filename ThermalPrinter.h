@@ -1,6 +1,7 @@
 #ifndef ThermalPrinter_h
 #define ThermalPrinter_h
 
+#include <Arduino.h>
 #include <SoftwareSerial.h>
 
 #define BAUD_RATE 19200
@@ -15,6 +16,7 @@ class ThermalPrinter {
   
   //control commands
   void settings(uint8_t a, uint8_t b, uint8_t c);
+  void finePrintSettings();
   void density(uint8_t n);
   void sleep(uint8_t n);
   void wake();
@@ -33,6 +35,8 @@ class ThermalPrinter {
   void underline(uint8_t n);
   void updownMode(bool updown);
   void reverseMode(bool reverse);
+  void characterSet(uint8_t n);
+  void characterCodeTable(uint8_t n);
  
   //print commands
   void tab();
@@ -49,10 +53,12 @@ class ThermalPrinter {
   
   // test
   void testPage();
+  void writeCharacter(char c);
+  void writeString(const char *str);
   
   private: 
   // serial methods
-  void ascii(char c);
+
   void write(uint8_t a, uint8_t b, uint8_t c, uint8_t d, uint8_t e);
   void write(uint8_t a, uint8_t b, uint8_t c);
   void write(uint8_t a, uint8_t b);

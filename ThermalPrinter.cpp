@@ -30,6 +30,10 @@ void ThermalPrinter::settings(uint8_t a, uint8_t b, uint8_t c) {
   }
 }
 
+void ThermalPrinter::finePrintSettings() {
+  settings(0x64, 0x64, 0x0A);
+}
+
 //D4..D0 of n is used to set the printing density
 //Density is 50% + 5% * n(D4-D0) printing density
 //D7..D5 of n is used to set the printing break time
@@ -40,7 +44,7 @@ void ThermalPrinter::density(uint8_t n) {
 
 // Setting the time for control board to enter sleep mode.
 // n = 0-255 The time waiting for sleep after printing finished，
-// Unit(Second)，Default:0(don’t sleep) 
+// Unit(Second)，Default:0(don’t sleep)
 void ThermalPrinter::sleep(uint8_t n) {
   if (n > 0) {
     write(0x1b, 0x38, n);
@@ -52,6 +56,7 @@ void ThermalPrinter::sleep(uint8_t n) {
 // command and data.
 void ThermalPrinter::wake() {
   write(0xff);
+  delay(DELAY);
 }
 
 // default is 32 dots
@@ -133,8 +138,32 @@ void ThermalPrinter::reverseMode(bool reverse) {
   }
 }
 
-void ThermalPrinter::ascii(char c) {
+// Select an internal character set n as follows:
+// 0:USA       5:Sweden 10:Denmark II
+// 1:France    6:Italy  11:Spain II
+// 2:Germany   7:Spain1 12:Latin America
+// 3:U.K.      8:Japan  13:Korea
+// 4:Denmark 1 9:Norway
+void ThermalPrinter::characterSet(uint8_t n) {
+  if(n >= 0 && n <= 13) {
+    write(0x1b, 0x52, n);
+  }
+}
+
+// Select a character code:
+// 0 for PC437 1 for PC850
+void ThermalPrinter::characterCodeTable(uint8_t n) {
+  if(n == 0 || n == 1) {
+    write(0x1b, 0x74, n);
+  }
+}
+
+void ThermalPrinter::writeCharacter(char c) {
   _serial->print(c);
+}
+
+void ThermalPrinter::writeString(const char *str) {
+  _serial->print(str);
 }
 
 void ThermalPrinter::write(uint8_t a, uint8_t b, uint8_t c, uint8_t d, uint8_t e) {
@@ -189,7 +218,7 @@ void ThermalPrinter::dotFeed(uint8_t n) {
 // The print buffer is cleared
 // Reset the param to default value
 // return to standard mode
-// Delete user-defined characters 
+// Delete user-defined characters
 void ThermalPrinter::reset() {
   write(0x1b, 0x40);
 }
@@ -203,7 +232,7 @@ void ThermalPrinter::asbStatus(uint8_t n) {
 // Transmit board status to host
 // Return:
 // P<Paper>V<Voltage>T<Degree>
-// Example: P1V72T30 Mean:Paper Ready,Current voltage 7.2V,Printer degree:30 
+// Example: P1V72T30 Mean:Paper Ready,Current voltage 7.2V,Printer degree:30
 void ThermalPrinter::transmitStatusToHost() {
   write(0x1b, 0x76, 0x00);
 }
