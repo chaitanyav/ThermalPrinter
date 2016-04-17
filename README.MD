@@ -87,3 +87,35 @@
      printer.reverseMode(false);
    ```
    ![Reverse Mode](http://i.imgur.com/NkfduOZ.jpg)
+* Character control commands
+  ```
+    printer.bold(true);
+    printer.writeString("This is bold text");
+    printer.bold(false);
+    printer.lineFeed();
+
+    printer.writeString("This is normal text");
+    printer.lineFeed();
+
+    printer.underline(1);
+    printer.writeString("This is underline 1");
+    printer.lineFeed();
+
+    printer.underline(2);
+    printer.writeString("This in underline 2");
+    printer.lineFeed();
+    printer.underline(0); // no underline
+
+    printer.mode(0x10);
+    printer.writeString("Double height");
+    printer.lineFeed();
+
+    printer.mode(0x20);
+    printer.writeString("Double width");
+    printer.lineFeed();
+
+    printer.mode(0x08);
+    printer.writeString("Emphasized text");
+    printer.lineFeed();
+  ```
+  ![Character control commands](http://i.imgur.com/JUfi8VS.jpg)
