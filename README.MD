@@ -71,3 +71,19 @@
      printer.lineFeeds(3);
    ```
     ![Justify Text](http://i.imgur.com/S2mpNWw.jpg)
+ * Reverse Mode
+   ```
+     printer.reverseMode(true);
+
+     printer.writeString("*******************************");
+     printer.lineFeed();
+
+     printer.writeString("This is reverse mode!!! :-) :-)");
+     printer.lineFeed();
+
+     printer.writeString("*******************************");
+     printer.lineFeed();
+
+     printer.reverseMode(false);
+   ```
+   ![Reverse Mode](http://i.imgur.com/NkfduOZ.jpg)
