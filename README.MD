@@ -1,4 +1,4 @@
-#A Arduino library for mini thermal printer#
+#Arduino library for mini thermal printer#
 
 
 ### Components required to experiment with the mini thermal printer ###
@@ -52,3 +52,22 @@
      printer.lineFeeds(4);
    ```
    ![Character Codes](http://i.imgur.com/mhJOxTc.jpg)
+
+ * Justify text to left, middle and right
+   ```
+     // align left
+     printer.alignMode(LEFT);
+     printer.writeString("Left");
+     printer.lineFeeds(3);
+
+     // align middle
+     printer.alignMode(MIDDLE);
+     printer.writeString("Middle");
+     printer.lineFeeds(3);
+
+     //align right
+     printer.alignMode(RIGHT);
+     printer.writeString("Right");
+     printer.lineFeeds(3);
+   ```
+    ![Justify Text](http://i.imgur.com/S2mpNWw.jpg)
